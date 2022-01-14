@@ -71,15 +71,6 @@ struct transform3 {
   ALGEBRA_HOST_DEVICE
   transform3(const vector3 &t, const vector3 &z, const vector3 &x) {
 
-    auto y = cross(z, x);
-    element_getter()(_data, 0, 0) = x[0];
-    element_getter()(_data, 1, 0) = x[1];
-    element_getter()(_data, 2, 0) = x[2];
-    element_getter()(_data, 3, 0) = 0.;
-    element_getter()(_data, 0, 1) = y[0];
-    element_getter()(_data, 1, 1) = y[1];
-    element_getter()(_data, 2, 1) = y[2];
-    element_getter()(_data, 3, 1) = 0.;
     element_getter()(_data, 0, 2) = z[0];
     element_getter()(_data, 1, 2) = z[1];
     element_getter()(_data, 2, 2) = z[2];
@@ -88,6 +79,18 @@ struct transform3 {
     element_getter()(_data, 1, 3) = t[1];
     element_getter()(_data, 2, 3) = t[2];
     element_getter()(_data, 3, 3) = 1.;
+
+    // if z is parallel to (0,0,1), x is replace to (1,0,0) X z
+    vector3 new_x = abs(z[2] - 1) < 1e-3 ? cross(vector3(1, 0, 0), z) : x;
+
+    element_getter()(_data, 0, 0) = new_x[0];
+    element_getter()(_data, 1, 0) = new_x[1];
+    element_getter()(_data, 2, 0) = new_x[2];
+    element_getter()(_data, 3, 0) = 0.;
+    element_getter()(_data, 0, 1) = y[0];
+    element_getter()(_data, 1, 1) = y[1];
+    element_getter()(_data, 2, 1) = y[2];
+    element_getter()(_data, 3, 1) = 0.;
 
     _data_inv = invert(_data);
   }
