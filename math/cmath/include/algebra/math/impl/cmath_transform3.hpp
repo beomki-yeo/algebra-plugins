@@ -81,7 +81,8 @@ struct transform3 {
     element_getter()(_data, 3, 3) = 1.;
 
     // if z is parallel to (0,0,1), x is replace to (1,0,0) X z
-    vector3 new_x = abs(z[2] - 1) < 1e-3 ? cross(vector3(1, 0, 0), z) : x;
+    vector3 new_x = abs(z[2] - 1) < 1e-3 ? cross({1, 0, 0}, z) : x;
+    vector3 y = cross(z, x);
 
     element_getter()(_data, 0, 0) = new_x[0];
     element_getter()(_data, 1, 0) = new_x[1];
