@@ -8,8 +8,8 @@
 // Project include(s).
 #include "algebra/array_cmath.hpp"
 
-// Test include(s).
-#include "test_host_basics.hpp"
+// Local include(s).
+#include "test_cuda_basics.cuh"
 
 // GoogleTest include(s).
 #include <gtest/gtest.h>
@@ -23,9 +23,9 @@ struct test_specialisation_name {
   static std::string GetName(int i) {
     switch (i) {
       case 0:
-        return "array_cmath<float>";
+        return "cuda_array_cmath<float>";
       case 1:
-        return "array_cmath<double>";
+        return "cuda_array_cmath<double>";
       default:
         return "unknown";
     }
@@ -45,5 +45,5 @@ typedef testing::Types<
         algebra::array::transform3<double>, algebra::array::cartesian2<double>,
         algebra::array::polar2<double>, algebra::array::cylindrical2<double> > >
     array_cmath_types;
-INSTANTIATE_TYPED_TEST_SUITE_P(algebra_plugins, test_host_basics,
+INSTANTIATE_TYPED_TEST_SUITE_P(algebra_plugins, test_cuda_basics,
                                array_cmath_types, test_specialisation_name);
