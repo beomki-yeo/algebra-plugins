@@ -112,6 +112,11 @@ class test_device_basics : public test_base<T> {
       }
     }
 
+    auto b32 = matrix_actor().template block<3, 2>(m2, 1, 1);
+
+    algebra::getter::element(b32, 0, 0) = 2.;
+    result += algebra::getter::element(m2, 1, 1);
+
     return result;
   }
 

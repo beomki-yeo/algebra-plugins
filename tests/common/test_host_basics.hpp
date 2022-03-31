@@ -154,6 +154,12 @@ TYPED_TEST_P(test_host_basics, matrix64) {
       }
     }
   }
+
+  // Test block operations
+  auto b32 = typename TypeParam::matrix_actor().template block<3, 2>(m, 1, 1);
+
+  algebra::getter::element(b32, 0, 0) = 2.;
+  ASSERT_NEAR(algebra::getter::element(m, 1, 1), 2., this->m_epsilon);
 }
 
 // Test matrix operations with 3x3 matrix

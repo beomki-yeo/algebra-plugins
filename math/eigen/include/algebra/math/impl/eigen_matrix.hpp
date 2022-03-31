@@ -45,8 +45,7 @@ struct actor {
 
   /// Operator getting a block of a const matrix
   template <int ROWS, int COLS, class input_matrix_type>
-  ALGEBRA_HOST_DEVICE matrix_type<ROWS, COLS> block(const input_matrix_type &m,
-                                                    int row, int col) {
+  ALGEBRA_HOST_DEVICE auto block(input_matrix_type &m, int row, int col) {
     return m.template block<ROWS, COLS>(row, col);
   }
 

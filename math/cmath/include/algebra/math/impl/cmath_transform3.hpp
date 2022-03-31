@@ -33,7 +33,8 @@ struct transform3 {
 
   /// 2D Matrix type
   template <size_type ROWS, size_type COLS>
-  using matrix_type = typename matrix_actor::template matrix_type<ROWS, COLS>;
+  using matrix_type =
+      typename matrix_actor::template matrix_type<scalar_type, ROWS, COLS>;
 
   /// Array type
   template <size_type N>
