@@ -103,7 +103,8 @@ struct actor {
 
   // Create identity matrix
   template <size_type ROWS, size_type COLS>
-  ALGEBRA_HOST_DEVICE inline matrix_type<ROWS, COLS> identity() const {
+  ALGEBRA_HOST_DEVICE constexpr inline matrix_type<ROWS, COLS> identity()
+      const {
     matrix_type<ROWS, COLS> ret;
 
     for (size_type i = 0; i < ROWS; ++i) {
