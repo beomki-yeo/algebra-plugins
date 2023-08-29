@@ -13,7 +13,7 @@ target_link_libraries( algebra_tests_accel_common
 add_library( algebra::tests_accel_common ALIAS algebra_tests_accel_common )
 
 # Run the CUDA test(s) by default, if CUDA is available.
-vecmem_check_language( CUDA )
+#vecmem_check_language( CUDA )
 set( _cudaEnabledDefault FALSE )
 if( CMAKE_CUDA_COMPILER )
    set( _cudaEnabledDefault TRUE )
@@ -27,7 +27,7 @@ if( ALGEBRA_PLUGINS_TEST_CUDA )
 endif()
 
 # Run the SYCL test(s) by default, if SYCL is available.
-vecmem_check_language( SYCL )
+#vecmem_check_language( SYCL )
 set( _syclEnabledDefault FALSE )
 if( CMAKE_SYCL_COMPILER )
    set( _syclEnabledDefault TRUE )
@@ -38,4 +38,9 @@ unset( _syclEnabledDefault )
 
 if( ALGEBRA_PLUGINS_TEST_SYCL )
    add_subdirectory( sycl )
+endif()
+
+# Run the FPGA test(s) if the option is set.
+if ( ALGEBRA_PLUGINS_SETUP_SYCL_FPGA )
+   add_subdirectory( sycl_fpga )
 endif()

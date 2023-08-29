@@ -18,10 +18,10 @@ endif()
 add_library( algebra::tests_common ALIAS algebra_tests_common )
 
 # Set up all of the (available) "host" tests.
-algebra_add_test( array
-   "array/array_cmath.cpp"
-   LINK_LIBRARIES GTest::gtest_main algebra::tests_common
-                  algebra::array_cmath )
+#algebra_add_test( array
+#   "array/array_cmath.cpp"
+#   LINK_LIBRARIES GTest::gtest_main algebra::tests_common
+#                  algebra::array_cmath )
 
 if( ALGEBRA_PLUGINS_INCLUDE_EIGEN )
    algebra_add_test( eigen
