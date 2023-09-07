@@ -81,7 +81,7 @@ endif()
 
 # Set up VecMem.
 option( ALGEBRA_PLUGINS_SETUP_VECMEM
-   "Set up the VecMem target(s) explicitly" FALSE )
+   "Set up the VecMem target(s) explicitly" TRUE )
 option( ALGEBRA_PLUGINS_USE_SYSTEM_VECMEM
    "Pick up an existing installation of VecMem from the build environment"
    ${ALGEBRA_PLUGINS_USE_SYSTEM_LIBS} )

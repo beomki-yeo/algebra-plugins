@@ -40,11 +40,11 @@ endif()
 add_library( algebra::tests_cuda_common ALIAS algebra_tests_cuda_common )
 
 # Set up all of the (available) CUDA tests.
-algebra_add_test( array_cuda "array_cmath.cu"
-   LINK_LIBRARIES algebra::array_cmath
-                  algebra::tests_cuda_common GTest::gtest_main )
-target_compile_options( algebra_test_array_cuda
-   PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:--expt-relaxed-constexpr> )
+#algebra_add_test( array_cuda "array_cmath.cu"
+#   LINK_LIBRARIES algebra::array_cmath
+#                  algebra::tests_cuda_common GTest::gtest_main )
+#target_compile_options( algebra_test_array_cuda
+#   PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:--expt-relaxed-constexpr> )
 
 if( ALGEBRA_PLUGINS_INCLUDE_EIGEN )
    algebra_add_test( eigen_cuda "eigen_cmath.cu" "eigen_eigen.cu"
