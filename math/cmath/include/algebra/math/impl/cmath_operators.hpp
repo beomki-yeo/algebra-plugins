@@ -37,6 +37,14 @@ ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 2> operator*(
 template <template <typename, std::size_t> class array_t, typename scalar_t,
           std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
 ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 2> operator*(
+    const array_t<scalar_t, 2> &a, long double s) {
+
+  return {a[0] * static_cast<scalar_t>(s), a[1] * static_cast<scalar_t>(s)};
+}
+
+template <template <typename, std::size_t> class array_t, typename scalar_t,
+          std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
+ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 2> operator*(
     float s, const array_t<scalar_t, 2> &a) {
 
   return {static_cast<scalar_t>(s) * a[0], static_cast<scalar_t>(s) * a[1]};
@@ -46,6 +54,14 @@ template <template <typename, std::size_t> class array_t, typename scalar_t,
           std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
 ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 2> operator*(
     double s, const array_t<scalar_t, 2> &a) {
+
+  return {static_cast<scalar_t>(s) * a[0], static_cast<scalar_t>(s) * a[1]};
+}
+
+template <template <typename, std::size_t> class array_t, typename scalar_t,
+          std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
+ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 2> operator*(
+    long double s, const array_t<scalar_t, 2> &a) {
 
   return {static_cast<scalar_t>(s) * a[0], static_cast<scalar_t>(s) * a[1]};
 }
@@ -92,6 +108,15 @@ ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 3> operator*(
 template <template <typename, std::size_t> class array_t, typename scalar_t,
           std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
 ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 3> operator*(
+    const array_t<scalar_t, 3> &a, long double s) {
+
+  return {a[0] * static_cast<scalar_t>(s), a[1] * static_cast<scalar_t>(s),
+          a[2] * static_cast<scalar_t>(s)};
+}
+
+template <template <typename, std::size_t> class array_t, typename scalar_t,
+          std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
+ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 3> operator*(
     float s, const array_t<scalar_t, 3> &a) {
 
   return {static_cast<scalar_t>(s) * a[0], static_cast<scalar_t>(s) * a[1],
@@ -102,6 +127,15 @@ template <template <typename, std::size_t> class array_t, typename scalar_t,
           std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
 ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 3> operator*(
     double s, const array_t<scalar_t, 3> &a) {
+
+  return {static_cast<scalar_t>(s) * a[0], static_cast<scalar_t>(s) * a[1],
+          static_cast<scalar_t>(s) * a[2]};
+}
+
+template <template <typename, std::size_t> class array_t, typename scalar_t,
+          std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
+ALGEBRA_HOST_DEVICE inline array_t<scalar_t, 3> operator*(
+    long double s, const array_t<scalar_t, 3> &a) {
 
   return {static_cast<scalar_t>(s) * a[0], static_cast<scalar_t>(s) * a[1],
           static_cast<scalar_t>(s) * a[2]};
@@ -166,6 +200,23 @@ template <typename size_type, template <typename, size_type> class array_t,
           typename scalar_t, size_type ROWS, size_type COLS,
           std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
 ALGEBRA_HOST_DEVICE inline array_t<array_t<scalar_t, ROWS>, COLS> operator*(
+    const array_t<array_t<scalar_t, ROWS>, COLS> &a, long double s) {
+
+  array_t<array_t<scalar_t, ROWS>, COLS> ret;
+
+  for (size_type i = 0; i < ROWS; ++i) {
+    for (size_type j = 0; j < COLS; ++j) {
+      ret[j][i] = a[j][i] * static_cast<scalar_t>(s);
+    }
+  }
+
+  return ret;
+}
+
+template <typename size_type, template <typename, size_type> class array_t,
+          typename scalar_t, size_type ROWS, size_type COLS,
+          std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
+ALGEBRA_HOST_DEVICE inline array_t<array_t<scalar_t, ROWS>, COLS> operator*(
     float s, const array_t<array_t<scalar_t, ROWS>, COLS> &a) {
 
   array_t<array_t<scalar_t, ROWS>, COLS> ret;
@@ -184,6 +235,23 @@ template <typename size_type, template <typename, size_type> class array_t,
           std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
 ALGEBRA_HOST_DEVICE inline array_t<array_t<scalar_t, ROWS>, COLS> operator*(
     double s, const array_t<array_t<scalar_t, ROWS>, COLS> &a) {
+
+  array_t<array_t<scalar_t, ROWS>, COLS> ret;
+
+  for (size_type i = 0; i < ROWS; ++i) {
+    for (size_type j = 0; j < COLS; ++j) {
+      ret[j][i] = a[j][i] * static_cast<scalar_t>(s);
+    }
+  }
+
+  return ret;
+}
+
+template <typename size_type, template <typename, size_type> class array_t,
+          typename scalar_t, size_type ROWS, size_type COLS,
+          std::enable_if_t<std::is_scalar_v<scalar_t>, bool> = true>
+ALGEBRA_HOST_DEVICE inline array_t<array_t<scalar_t, ROWS>, COLS> operator*(
+    long double s, const array_t<array_t<scalar_t, ROWS>, COLS> &a) {
 
   array_t<array_t<scalar_t, ROWS>, COLS> ret;
 
